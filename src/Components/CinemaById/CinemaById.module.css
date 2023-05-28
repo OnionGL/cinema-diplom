@@ -1,0 +1,45 @@
+.cinemabyid__img img {
+  z-index: 1;
+  border-radius: 22px;
+}
+.cinemaID {
+  z-index: 1;
+  padding: 100px 100px;
+  background: #280670;
+  color: #fff;
+  font-size: 22px;
+}
+.cinemabyid__text div:first-child {
+  z-index: 1;
+  font-size: 54px;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+.cinemaID__carousel img {
+  display: block;
+  height: 400px;
+  margin: auto;
+}
+.cinemaID__carousel {
+  margin-top: 50px;
+  width: 100%;
+}
+.cinemabyid__text div {
+  margin-bottom: 50px;
+}
+@media (max-width: 996px) {
+  .cinemabyid__img img {
+    width: 250px;
+    height: 300px;
+  }
+  .cinemabyid__text {
+    font-size: 17px;
+  }
+  .cinemabyid__text div:first-child {
+    font-size: 24px;
+  }
+  .cinemaID__carousel img {
+    height: 150px;
+  }
+}

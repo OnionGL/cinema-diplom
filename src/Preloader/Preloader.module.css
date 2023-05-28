@@ -1,0 +1,12 @@
+.preloader {
+  width: 100%;
+  height: 90vh;
+  background: #280670;
+}
+.preloader img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 300px;
+}
+

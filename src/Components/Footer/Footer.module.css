@@ -1,0 +1,24 @@
+.footer {
+  background: #3916ab;
+  color: #fff;
+  height: 200px;
+}
+.footer h1 {
+  padding-top: 20px;
+  font-size: 17px;
+}
+.footer__about {
+  width: 200px;
+}
+.footer__about p {
+  font-size: 14px;
+}
+.footer__about_library li {
+  font-size: 14px;
+}
+@media (max-width: 720px) {
+  .footer {
+    flex-wrap: wrap;
+    height: 100%;
+  }
+}
