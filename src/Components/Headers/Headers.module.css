@@ -63,6 +63,7 @@
 }
 .search__input {
   height: 400px;
+  width: 100%;
 }
 .logo h1 {
   font-size: 50px;

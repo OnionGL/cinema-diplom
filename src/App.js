@@ -33,7 +33,7 @@ const App = () => {
   );
   return <>
   {
-    user ?
+    // user ?
     <>
     <Headers />
     <div className="main__app">
@@ -46,8 +46,8 @@ const App = () => {
               <Route exact path='/cinema/:value' element = {<SearchByKeyword />}></Route>
               <Route exact path='/cinemaByFilter/:ratingfrom/:ratingto/:yearfrom/:yearto/:genre/:order' element = {<SearchByFilter />}></Route>
               <Route exact path='/cinemainfo/:id' element = {<CinemaById />}></Route>
-              <Route exact path='/recommendations/you' element = {<Cinema cinemaPage={5} />}></Route>
-              <Route exact path='/recommendations/people' element = {<Cinema cinemaPage={8} />}></Route>
+              {/* <Route exact path='/recommendations/you' element = {<Cinema cinemaPage={5} />}></Route> */}
+              {/* <Route exact path='/recommendations/people' element = {<Cinema cinemaPage={8} />}></Route> */}
             </Routes>
           </div>
         </animated.div>
@@ -56,11 +56,11 @@ const App = () => {
       </div>
     </>
     
-    :
-    <div>
-      <Headers />
-      <Login />
-    </div>
+    // :
+    // <div>
+    //   <Headers />
+    //   <Login />
+    // </div>
   }
                  
   </>;

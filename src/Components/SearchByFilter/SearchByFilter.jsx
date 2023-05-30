@@ -24,12 +24,11 @@ const SearchByFilter = () => {
    },[page])
    return <>
    <Pagination style={{
-                  marginLeft: 250,
-                  paddingTop: 20,
-                  color: "#fff"
+                 background: '#280670',
+                 paddingTop: 20,
                }} onChange={(_ ,value) => setPage(value)} count={totalPage} color="primary" />
       {isFetching ? <Preloader/> : 
-      <div  className={style.cinema}>
+      <div className={style.cinema}>
          <div className="container">
                <div className="row">
                <div className={style.number__container + ' ' + "col-md-12"}>

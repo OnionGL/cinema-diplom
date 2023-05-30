@@ -18,9 +18,9 @@ return<>
   Logout
 </button> : null}
 
-            <Link onClick = {() => props.isMobile && props.closeMobMenu()}  className={style.best} to={"/recommendations/you"}>
-My recommendations</Link>
-            <Link onClick = {() => props.isMobile && props.closeMobMenu()}  className={style.best} to={"/recommendations/people"}>Region Recommendations</Link>
+            {/* <Link onClick = {() => props.isMobile && props.closeMobMenu()}  className={style.best} to={"/recommendations/you"}>
+My recommendations</Link> */}
+            {/* <Link onClick = {() => props.isMobile && props.closeMobMenu()}  className={style.best} to={"/recommendations/people"}>Region Recommendations</Link> */}
             <Link onClick = {() => props.isMobile && props.closeMobMenu()}  className={style.best} to={"/cinema"}>Best</Link>
             <button className={style.button_filter} onClick={(e) => props.filter ? props.setFilter(false) : props.setFilter(true)}>Filter</button>
             <form className={style.input__form} onSubmit={(e) => props.SubmitForm(props.value)}>
