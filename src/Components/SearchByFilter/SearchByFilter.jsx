@@ -34,7 +34,7 @@ const SearchByFilter = () => {
                <div className={style.number__container + ' ' + "col-md-12"}>
                </div>
                {cinema.map(item =>  
-               <div className={style.cinema__container + ' ' + "col-md-6" + ' ' + "col-xl-3" + ' ' + "col-lg-4"}>
+               <div style={{margin: 20}} className={style.cinema__container + ' ' + "col-md-6" + ' ' + "col-xl-3" + ' ' + "col-lg-4"}>
                   <div className={style.cinema__info} >
                      <div className={style.cinema__info_container}>
                      <p className={item.rating >=8.5 ? style.rating__color_8_10 : style.rating__color_0_8}>{item.rating}</p>
