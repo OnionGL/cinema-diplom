@@ -13,7 +13,6 @@
   z-index: 1;
   font-size: 54px;
   font-weight: 700;
-  margin-bottom: 50px;
 }
 
 .cinemaID__carousel img {
@@ -26,7 +25,7 @@
   width: 100%;
 }
 .cinemabyid__text div {
-  margin-bottom: 50px;
+  
 }
 @media (max-width: 996px) {
   .cinemabyid__img img {

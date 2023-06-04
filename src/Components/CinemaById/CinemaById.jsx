@@ -5,9 +5,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { setFilmById, setVideoFilm , setFrames} from '../../redux/CinemaById-reducer'
 import Carousel from 'react-material-ui-carousel'
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { authentication } from '../../API/Firebase';
 
 
 const CinemaById = () => {
+   const [user] = useAuthState(authentication)
    const film = useSelector(getFilmByIdSelector)
    const url = useSelector(getURL)
    const frames = useSelector(getFrames)
@@ -27,9 +30,21 @@ const CinemaById = () => {
                </div>
                <div className={style.cinemabyid__text + ' ' + "col-md-7 d-flex flex-column"}>
                   <div>{film.nameRu}</div>
-                  <button style={{border: '2px solid white', margin: '20px 0' , background: 'none' , color: 'white' , fontWeight: 'bold'}}>
+                  <div style={{marginBottom: 10}}>
+                     Рейтинг IMDB: {film.ratingImdb}
+                  </div>
+                  <div style={{marginBottom: 10}}>
+                     Год выпуска: {film.year}
+                  </div>
+                  <div style={{display: 'flex', fontSize: 22 , marginBottom: 10}}>
+                     <div style={{fontSize: 22 , marginRight: 10}}>Жанр:</div> <div style={{display: 'flex' , fontSize: 22 , marginRight: 5}}>{film.genres && film.genres.map((i , index) => `${i.genre}` + ((index + 1) !== film.genres.length ? ', ' : ''))}</div>
+                  </div>
+                  <div style={{display: 'flex', fontSize: 22 , marginBottom: 10}}>
+                     <div style={{fontSize: 22 , marginRight: 10}}>Страна производства:</div> <div style={{display: 'flex' , fontSize: 22 , marginRight: 5}}>{film.countries && film.countries.map((i , index) => `${i.country}` + ((index + 1) !== film.countries.length ? ', ' : ''))}</div>
+                  </div>
+                  {user && <button style={{border: '2px solid white' , background: 'none' , color: 'white' , fontWeight: 'bold' , margin: '30px 0'}}>
                      Добавить в избранное
-                  </button>
+                  </button>}
                  {film.shortDescription  ? <div>{`"` + film.shortDescription + `"`}</div> : <div></div>}
                   <div>{film.description}</div>
                </div>
