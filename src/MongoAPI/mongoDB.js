@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const defaultURL = 'http://localhost:8080'
+const defaultURL = 'https://diplom-cinema.onrender.com/'
 
 export const getUserList = () => {
   return axios.get(`${defaultURL}/userList`)
