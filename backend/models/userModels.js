@@ -3,9 +3,15 @@ const mongoose = require('mongoose');
 const UserModel = new mongoose.Schema({
    fullName: {
       type: String,
+      require: true
    },
    email: {
-      type: String
+      type: String,
+      require: true
+   },
+   passwordHash: {
+      type: String,
+      require: true
    },
    longitube: {
       type: Number
@@ -16,9 +22,6 @@ const UserModel = new mongoose.Schema({
    listSelectedFilms: {
       type: Array
    },
-   googleId: {
-      type: Number
-   }
 },{
    timestamps: true
 });

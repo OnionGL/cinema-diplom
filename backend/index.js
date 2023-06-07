@@ -3,6 +3,10 @@ const cors = require('cors');
 const mongoDBConnect = require('./db');
 const mongoose = require('mongoose');
 const User = require('./models/userModels'); 
+const {loginUser ,registerUser , checkAuthController} = require('./controller/loginController')
+const {checkAuth} = require('./utils/checkAuth');
+const authValidation = require('./validations/authValidators');
+
 
 const PORT = 8080;
 const app = express();
@@ -51,6 +55,13 @@ app.patch('/userUpdate' , async (req , res) => {
    await User.updateOne({googleId: 1} , update)
    res.json({message: "Обновление прошло успешно"})
 })
+
+
+app.post('/login' , loginUser)
+
+app.post('/register' , authValidation , registerUser)
+
+app.get('/me' , checkAuth , checkAuthController)
 
 start();
 

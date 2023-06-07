@@ -6,6 +6,25 @@
   justify-content: center;
   align-items: center;
 }
+
+.input {
+  padding: 5px;
+  border-radius: 8px;
+  background: #4872d3;
+  color: #fff;
+}
+
+.input::placeholder {
+  color: #fff;
+}
+
+.button { 
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background: #4872d3;
+ }
+
 .login_with_google_btn {
   transition: background-color 0.3s, box-shadow 0.3s;
 

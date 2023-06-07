@@ -10,13 +10,26 @@ import Footer from './Components/Footer/Footer';
 import {useAuthState} from 'react-firebase-hooks/auth'
 import {authentication} from './API/Firebase'
 import Login from './Components/Login/Login';
-import { getUserList, setUser } from './MongoAPI/mongoDB';
+import { getUserList, loginUser, setUser } from './MongoAPI/mongoDB';
+import { useDispatch } from 'react-redux';
 
 
 
 const App = () => {
+  const dispatch = useDispatch()
   const [user] = useAuthState(authentication)
   const location = useLocation()
+
+  const loginSuccess = (userId , token) => ({
+    type: 'LOGIN_SUCCESS',
+    payload: { userId },
+  });
+
+  useEffect(() => {
+    if(localStorage.getItem('user')){
+      dispatch(loginSuccess(localStorage.getItem('user')))
+    }
+  } , [])
 
   const transitions = useTransition(location , {
     from : {
@@ -33,7 +46,6 @@ const App = () => {
   );
   return <>
   {
-    // user ?
     <>
     <Headers />
     <div className="main__app">
@@ -46,8 +58,9 @@ const App = () => {
               <Route exact path='/cinema/:value' element = {<SearchByKeyword />}></Route>
               <Route exact path='/cinemaByFilter/:ratingfrom/:ratingto/:yearfrom/:yearto/:genre/:order' element = {<SearchByFilter />}></Route>
               <Route exact path='/cinemainfo/:id' element = {<CinemaById />}></Route>
-              {/* <Route exact path='/recommendations/you' element = {<Cinema cinemaPage={5} />}></Route> */}
-              {/* <Route exact path='/recommendations/people' element = {<Cinema cinemaPage={8} />}></Route> */}
+              <Route exact path='/login' element={<Login />}></Route>
+              <Route exact path='/recommendations/you' element = {<Cinema cinemaPage={5} />}></Route>
+              <Route exact path='/recommendations/people' element = {<Cinema cinemaPage={8} />}></Route>
             </Routes>
           </div>
         </animated.div>
@@ -56,11 +69,6 @@ const App = () => {
       </div>
     </>
     
-    // :
-    // <div>
-    //   <Headers />
-    //   <Login />
-    // </div>
   }
                  
   </>;

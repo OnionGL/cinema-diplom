@@ -1,28 +1,31 @@
 import React,{useEffect , useState} from 'react'
 import { useSelector , useDispatch } from 'react-redux'
 import style from "./Cinema.module.css"
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { getCinemaSelectorSuper, getTotalPageSelector , getIsFetchingSelector } from '../../redux/cinema-selector';
 import { getCinemaAPI } from '../../redux/cinema-reducer';
 import Pagination from '@mui/material/Pagination';
 import Preloader from '../../Preloader/Preloader';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const Cinema = ({cinemaPage = 1}) => {
+   const location = useLocation()
    const dispatch = useDispatch()
    const [page , setPage] = useState(cinemaPage)
    const cinema = useSelector(getCinemaSelectorSuper)
    const totalPage = useSelector(getTotalPageSelector)
    const isFetching = useSelector(getIsFetchingSelector)
    useEffect(() => {
+      console.log(location.pathname !== '/recommendations/you')
       dispatch(getCinemaAPI(1))
    }, [dispatch])
    useEffect(() => {
       dispatch(getCinemaAPI(page))
    },[page])
    return <>
-               {cinemaPage && <Pagination style={{
+               {cinemaPage && (location.pathname !== '/recommendations/you' && location.pathname !== '/recommendations/people') && <Pagination style={{
                   background: '#280670',
                   paddingTop: 20,
                }} onChange={(_ ,value) => setPage(value)} count={totalPage} color="secondary" />}

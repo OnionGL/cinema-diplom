@@ -9,12 +9,15 @@ import { getGenresSelector } from '../../redux/cinemaByFilter-selector'
 import { useTrail, animated } from 'react-spring'
 import NavLinks from './NavLinks';
 import MobileNavBAr from './MobileNavBar';
+import { getCurrentUser } from '../../MongoAPI/mongoDB';
+import { getLogin } from '../../redux/login-selector';
 
 
 
 
 const Headers = () => {
    const history = useNavigate()
+   const [currentUser , setCurrentUser] = useState(null)
    const dispatch = useDispatch()
    const genres = useSelector(getGenresSelector)
    const [value , setValue] = useState()  
