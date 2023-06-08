@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/cinema-diplom/static/css/main.ce1de7e4.css",
-    "main.js": "/cinema-diplom/static/js/main.93bfdf02.js",
+    "main.css": "/cinema-diplom/static/css/main.1904fe38.css",
+    "main.js": "/cinema-diplom/static/js/main.7bd01383.js",
     "static/media/Preloader.gif": "/cinema-diplom/static/media/Preloader.d306060ba982d8742352.gif",
     "index.html": "/cinema-diplom/index.html",
-    "main.ce1de7e4.css.map": "/cinema-diplom/static/css/main.ce1de7e4.css.map",
-    "main.93bfdf02.js.map": "/cinema-diplom/static/js/main.93bfdf02.js.map"
+    "main.1904fe38.css.map": "/cinema-diplom/static/css/main.1904fe38.css.map",
+    "main.7bd01383.js.map": "/cinema-diplom/static/js/main.7bd01383.js.map"
   },
   "entrypoints": [
-    "static/css/main.ce1de7e4.css",
-    "static/js/main.93bfdf02.js"
+    "static/css/main.1904fe38.css",
+    "static/js/main.7bd01383.js"
   ]
 }
