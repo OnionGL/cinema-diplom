@@ -81,7 +81,7 @@ const Headers = () => {
                 onChange={SearchRating}
                 className={style.slider}
                 />
-            <h2>Rating</h2>
+            <h2>Рейтинг</h2>
           <Nouislider range={{min: 1950, max: 2022}}
                 start={[1950, 2022]}
                 step={1}
@@ -89,23 +89,23 @@ const Headers = () => {
                 connect
                 onChange={SearchYear}
                 className={style.slider}/>
-               <h2>Year</h2>
+               <h2>Год</h2>
           </div>
           <div className={"d-flex flex-column"}>
-             <h4>Genre:</h4>
+             <h4>Жанр:</h4>
              <select className={style.filter__select} id= "select" onChange={SearchGenre}>
                 {genres.map(item => {
                    return <option value={item.id}>{item.genre}</option>
                 })}
              </select>
-             <h4>Sort:</h4>
+             <h4>Сортировка:</h4>
              <select className={style.filter__select} onChange={SearchSort}>
                 <option value="RATING">Rating</option>
                 <option value="YEAR">Year</option>
              </select>
           </div>
           <div>
-             <button className={style.button__find} onClick={(e) => SubmitFilter() || setFilter(false)}>Find</button>
+             <button className={style.button__find} onClick={(e) => SubmitFilter() || setFilter(false)}>Найти</button>
           </div>
             </div>
             </div>

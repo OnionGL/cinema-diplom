@@ -35,11 +35,10 @@ return<>
   Вход
 </Link>}
 
-            {isAuthenticated && <Link onClick = {() => props.isMobile && props.closeMobMenu()}  className={style.best} to={"/recommendations/you"}>
-My recommendations</Link>}
-            {isAuthenticated && <Link onClick = {() => props.isMobile && props.closeMobMenu()}  className={style.best} to={"/recommendations/people"}>Region Recommendations</Link>}
-            <Link onClick = {() => props.isMobile && props.closeMobMenu()}  className={style.best} to={"/cinema"}>Best</Link>
-            <button className={style.button_filter} onClick={(e) => props.filter ? props.setFilter(false) : props.setFilter(true)}>Filter</button>
+            {isAuthenticated && <Link onClick = {() => props.isMobile && props.closeMobMenu()}  className={style.best} to={"/recommendations/you"}>Рекомендации</Link>}
+            {/* {isAuthenticated && <Link onClick = {() => props.isMobile && props.closeMobMenu()}  className={style.best} to={"/recommendations/people"}></Link>} */}
+            <Link onClick = {() => props.isMobile && props.closeMobMenu()}  className={style.best} to={"/cinema"}>Лучшие</Link>
+            <button className={style.button_filter} onClick={(e) => props.filter ? props.setFilter(false) : props.setFilter(true)}>Фильтры</button>
             <form style={{display: 'flex', gap: 10}} className={style.input__form} onSubmit={(e) => props.SubmitForm(props.value)}>
                <input style={{border: 'none' , outline: 'none' , borderRadius: 8}} onChange={(e) => props.setValue(e.target.value)} placeholder="Поиск"
                className={style.inputSearch}/>
