@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoDBConnect = require('./db');
 const mongoose = require('mongoose');
 const User = require('./models/userModels'); 
+const Comment = require('./models/commentModels')
 const {loginUser ,registerUser , checkAuthController} = require('./controller/loginController')
 const {checkAuth} = require('./utils/checkAuth');
 const authValidation = require('./validations/authValidators');
@@ -62,6 +63,31 @@ app.post('/login' , loginUser)
 app.post('/register' , authValidation , registerUser)
 
 app.get('/me' , checkAuth , checkAuthController)
+
+app.post('/comment' , async (req , res) => {
+   const findComment = await Comment.find({idCinema: req.body.cinemaId})
+   if(findComment.length){
+      const update = {$set: {listComment: [...findComment[0].listComment , req.body.comment]}}
+      await Comment.updateOne({idCinema: req.body.cinemaId} , update)
+      return res.json({message: "Комментарий добавлен"})
+   } else {
+      const newComment = {
+         idCinema: req.body.cinemaId,
+         comment: [req.body.comment]
+      }
+      const comment = new Comment(newComment)
+      comment.save()
+      return res.json({message: "Комментарий добавлен"})
+   }
+})
+
+app.get('/comment/:id' , async (req , res) => {
+   const findComment = await Comment.findOne({idCinema: req.params.id})
+   if(findComment){
+      return res.json({comment: findComment.listComment})
+   }
+   return res.json({comment: []})
+})
 
 start();
 

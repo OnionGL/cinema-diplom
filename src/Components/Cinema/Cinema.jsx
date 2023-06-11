@@ -7,12 +7,14 @@ import { getCinemaAPI } from '../../redux/cinema-reducer';
 import Pagination from '@mui/material/Pagination';
 import Preloader from '../../Preloader/Preloader';
 import { useNavigate } from 'react-router-dom';
+import { getLogin } from '../../redux/login-selector';
 
 
 
 const Cinema = ({cinemaPage = 1}) => {
    const location = useLocation()
    const dispatch = useDispatch()
+   const isAuthenticated = useSelector(getLogin);
    const [page , setPage] = useState(cinemaPage)
    const cinema = useSelector(getCinemaSelectorSuper)
    const totalPage = useSelector(getTotalPageSelector)

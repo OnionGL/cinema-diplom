@@ -25,3 +25,15 @@ export const registerUser = (data) => {
 export const getCurrentUser = () => {
   return axios.get(`${defaultURL}/me`)
 }
+
+export const getComment = (idCinema) => {
+  return axios.get(`http://localhost:8080/comment/${idCinema}`)
+}
+
+export const addComment = (idCinema , comment) => {
+  const newComment = {
+    cinemaId: idCinema,
+    comment: comment
+  }
+  return axios.post(`http://localhost:8080/comment` , newComment)
+}
