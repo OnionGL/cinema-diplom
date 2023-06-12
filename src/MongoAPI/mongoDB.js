@@ -39,13 +39,13 @@ export const addComment = (idCinema , comment) => {
 }
 
 export const setRatingMongo = (rating , userId , idCinema) => {
-  return axios.post(`http://localhost:8080/rating` , {rating , userId , idCinema})
+  return axios.post(`${defaultURL}/rating` , {rating , userId , idCinema})
 }
 
 export const getRatingMongo = (userId , idCinema) => {
-  return axios.get(`http://localhost:8080/rating/${userId}/${idCinema}`)
+  return axios.get(`${defaultURL}/rating/${userId}/${idCinema}`)
 }
 
 export const getAllRatingMongo = (idCinema) => {
-  return axios.get(`http://localhost:8080/allRating/${idCinema}`)
+  return axios.get(`${defaultURL}/allRating/${idCinema}`)
 }
