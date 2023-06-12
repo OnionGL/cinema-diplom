@@ -27,7 +27,7 @@ export const getCurrentUser = () => {
 }
 
 export const getComment = (idCinema) => {
-  return axios.get(`http://localhost:8080/comment/${idCinema}`)
+  return axios.get(`${defaultURL}/comment/${idCinema}`)
 }
 
 export const addComment = (idCinema , comment) => {
@@ -35,5 +35,17 @@ export const addComment = (idCinema , comment) => {
     cinemaId: idCinema,
     comment: comment
   }
-  return axios.post(`http://localhost:8080/comment` , newComment)
+  return axios.post(`${defaultURL}/comment` , newComment)
+}
+
+export const setRatingMongo = (rating , userId , idCinema) => {
+  return axios.post(`http://localhost:8080/rating` , {rating , userId , idCinema})
+}
+
+export const getRatingMongo = (userId , idCinema) => {
+  return axios.get(`http://localhost:8080/rating/${userId}/${idCinema}`)
+}
+
+export const getAllRatingMongo = (idCinema) => {
+  return axios.get(`http://localhost:8080/allRating/${idCinema}`)
 }

@@ -26,7 +26,6 @@ const start = async () => {
 
 
 app.post('/user' , async (req , res) => {
-   console.log(req.body.data)
    if(!req.body.data) res.json({message: 'нет данных'})
    const newUser = {
       fullName: req.body.data.displayName,
@@ -87,6 +86,64 @@ app.get('/comment/:id' , async (req , res) => {
       return res.json({comment: findComment.listComment})
    }
    return res.json({comment: []})
+})
+
+app.post('/rating' , async (req , res) => {
+   const findUser = await User.findOne({_id: req.body.userId})
+   if(findUser.rating.find(i => i?.movieId == req.body.idCinema)){
+      const update = {
+         $set: { "rating.$[elem].rating": parseInt(req.body.rating) }
+      };
+   
+      const options = {
+         arrayFilters: [
+            { "elem.movieId": req.body.idCinema }
+         ]
+      };
+      await User.updateOne({_id: req.body.userId} , update , options)
+      return res.json({message: 'Рейтинг обновлен'})
+   }
+   const update = {$set: {rating: [...findUser.rating , {rating: parseInt(req.body.rating) , movieId: req.body.idCinema}]}}
+   await User.updateOne({_id: req.body.userId} , update)
+   return res.json({message: 'Рейтинг обновлен'})
+})
+
+app.get('/rating/:userId/:idCinema' , async (req , res) => {
+   const userId = req.params.userId;
+   const movieId = req.params.idCinema;
+
+   if(req.params.userId){
+      const user = await User.findOne({
+         _id: userId,
+         rating: { $elemMatch: { movieId: movieId } }
+      });
+   
+      if (!user) {
+         return res.status(404).json({ message: 'Пользователь или фильм не найдены' });
+      }
+      // Найден пользователь с указанным userId и рейтингом для указанного movieId
+      const rating = user.rating.find(item => item.movieId === movieId);
+      return res.json({ rating: rating.rating });
+   }
+
+})
+
+app.get('/allRating/:idCinema' , async (req , res) => {
+   const movieId = req.params.idCinema;
+
+   const ratings = await User.aggregate([
+      { $match: { 'rating.movieId': movieId } }, // Найти документы, где movieId совпадает
+      { $unwind: '$rating' }, // Развернуть массив rating
+      { $match: { 'rating.movieId': movieId } }, // Найти документы, где movieId совпадает
+      { $group: { _id: null, averageRating: { $avg: '$rating.rating' } } } // Вычислить среднее значение рейтинга
+   ]);
+
+   if (ratings.length === 0) {
+      return res.status(404).json({ message: 'Рейтинги для фильма не найдены' });
+   }
+   console.log(ratings)
+   const averageRating = ratings[0].averageRating;
+   return res.json({ averageRating });
 })
 
 start();

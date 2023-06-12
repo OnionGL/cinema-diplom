@@ -13,6 +13,9 @@ const UserModel = new mongoose.Schema({
       type: String,
       require: true
    },
+   rating: {
+      type: Array
+   },
    longitube: {
       type: Number
    },

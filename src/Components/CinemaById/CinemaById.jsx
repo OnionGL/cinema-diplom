@@ -7,12 +7,15 @@ import { setFilmById, setVideoFilm , setFrames} from '../../redux/CinemaById-red
 import Carousel from 'react-material-ui-carousel'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { authentication } from '../../API/Firebase';
-import { addComment, getComment } from '../../MongoAPI/mongoDB';
+import { addComment, getComment, getRatingMongo, setRatingMongo, getAllRatingMongo } from '../../MongoAPI/mongoDB';
 import { getLogin } from '../../redux/login-selector';
 
 
 const CinemaById = () => {
    const [user] = useAuthState(authentication)
+   const [rating , setRating] = useState(null)
+   const [allRating , setAllRating] = useState(0)
+   const [number , setNumber] = useState(0)
    const [comments , setComments] = useState([])
    const [areaComments , setAreaComments] = useState('')
    const film = useSelector(getFilmByIdSelector)
@@ -23,9 +26,27 @@ const CinemaById = () => {
    const { id } = useParams()
 
    const addComments = (comments) => {
-      console.log('asddsds')
       addComment(id , comments)
    }
+
+   const setRatingServer = (rating) => {
+      setRating(rating)
+      setRatingMongo(rating , isAuthenticated , id)
+      getAllRatingMongo(id).then(res => {
+         setAllRating(res.data.averageRating)
+      })
+   }
+
+   useEffect(() => {
+      if(isAuthenticated){
+         getRatingMongo(isAuthenticated , id).then(res => {
+            setRating(res.data.rating)
+         })
+         getAllRatingMongo(id).then(res => {
+            setAllRating(res.data.averageRating)
+         })
+      }
+   } , [isAuthenticated])
 
    useEffect(() => {
       dispatch(setFilmById(id))
@@ -34,9 +55,11 @@ const CinemaById = () => {
    },[])
 
    useEffect(() => {
-      getComment(id).then(res => {
-         setComments(res.data.comment)
-      })
+      if(!comments){
+         getComment(id).then(res => {
+            setComments(res.data.comment)
+         })
+      }
    } , [comments])
 
    return <>
@@ -63,6 +86,21 @@ const CinemaById = () => {
                   {isAuthenticated && <button style={{border: '2px solid white' , background: 'none' , color: 'white' , fontWeight: 'bold' , margin: '30px 0'}}>
                      Добавить в избранное
                   </button>}
+
+                  <div style={{margin: '20px 0'}}>
+                     {(rating && isAuthenticated) ? `Моя оценка: ${rating}` : ''} 
+                  </div>
+
+                  <div style={{margin: '20px 0'}}>
+                     {isAuthenticated && `Оценка всех пользователей: ${allRating}`}
+                  </div>
+
+                  {isAuthenticated && <div style={{margin: '20px 0'}}>
+                     <input placeholder='0-10' type="number" onChange={(e) => setNumber(e.target.value)}/>
+                     <button onClick={() => (number >= 0 && number <= 10) && setRatingServer(number)}>Поставить оценку</button>
+                     {(number && number <= 0 || number >= 10) && <div style={{color: 'red' , fontWeight: 700}}>Значение должно быть в диапозоне от 0 до 10</div>}
+                  </div>}
+
                  {film.shortDescription  ? <div>{`"` + film.shortDescription + `"`}</div> : <div></div>}
                   <div>{film.description}</div>
                </div>
